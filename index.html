@@ -1,14 +1,42 @@
 <!DOCTYPE html>
 <html>
-	<head>
-	</head>
+<head>
+</head>
+<body>
 
-	<body>
-		<div>
-			<h1>Start</h1>
-		</div>
-		<div>
-			<a href="quiz.html"><button type="button">Quiz</button></a>
-		</div>
-	</body>
+  <div id="welcomeView">
+    <div>
+      <h1>Start</h1>
+    </div>
+    <div id="selectQuizContainer">
+    </div>
+  </div>
+  
+  <div id="quizView">
+    <div>
+    	<p id="score">Score</p>
+    </div>
+    <div>
+    	<p id="question">Question</p>
+    </div>
+
+    <div id="answerOptions">
+    	<div>
+    		<button id="0" class="optionButton"></button>
+    		<button id="1" class="optionButton"></button>
+    	</div>
+    	<div>
+    		<button id="2" class="optionButton"></button>
+    		<button id="3" class="optionButton"></button>
+    	</div>
+    </div>
+  </div>
+
+  <div id="scoreView">
+  	<p id="finalScore"> Final score </p>
+  	<p id="didPassMessage"> Message </p>
+  </div>
+
+  <script src="src/main.js"></script>
+</body>
 </html>
