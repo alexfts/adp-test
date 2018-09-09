@@ -1,0 +1,49 @@
+body {
+	font-family: initial;
+}
+
+.view {
+	position: absolute;
+	top: 30%;
+	width: 100%;
+	text-align: center;
+	display: none;
+}
+
+#selectQuizContainer {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.selectQuizButton {
+	margin: 5px;
+	font-size: 25px;
+	border: 1px solid grey;
+	background-color: #f7faff;
+	width: 30%;
+}
+
+#question {
+	font-size: 22px;
+}
+
+.optionButton {
+	width: 40%;
+    font-size: 18px;
+    margin: 5px;
+    border: 3px solid #d9d9dd;
+    height: 50px;
+    background-color: #f5f4ff;
+}
+
+#score {
+	position: fixed;
+    top: 30px;
+    right: 30px;
+    font-size: 26px;
+}
+
+#scoreView {
+	font-size: 40px;
+}

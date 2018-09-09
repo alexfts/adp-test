@@ -74,30 +74,31 @@ class GameHandler {
 	handleSelectedAnswer(option) {
 		let id = parseInt(option.id);
 		let isCorrect = this.game.processAnswer(id);
-		// TODO highlight if the answer is correct
-		if (isCorrect) {
-			this.view.updateScore(this.game.score);
-		}
-		this.showNextQuestionAndScore();
+		if (isCorrect) this.view.updateScore(this.game.score);
+		this.view.showAnswerFeedback(option, isCorrect);
+		setTimeout(this.showNextQuestionAndScore.bind(this), 2000);
 	}
 
 	startGame(quizButton) {
-		let quizIndex = parseInt(quizButton.id[quizButton.id.length-1]);
-		this.game.currentQuiz = this.game.quizzes[quizIndex];
+		let quizTitle = quizButton.innerText;
+		this.game.currentQuiz = this.game.quizzes.filter(
+			quiz => quiz.title === quizTitle
+		)[0];
 		this.view.showGameView();
 		this.showNextQuestionAndScore();
 	}
 
 	finishGame() {
-		let pass = this.game.score / this.game.currentQuiz.questions.length >= 0.5;
+		let pass = this.game.score / this.game.currentQuiz.questions.length > 0.5;
 		this.view.showScoreView(
-			this.game.score, 
+			this.game.score,
+			this.game.currentQuiz.questions.length,
 			pass
 		);
 	}
 
-	get numberOfAvailableQuizzes() {
-		return this.game.quizzes.length;
+	get quizNames() {
+		return this.game.quizzes.map(({title}) => title);
 	}
 
 }
@@ -113,14 +114,12 @@ class GameView {
 	}
 
 	showWelcomeView() {
-		this.quizView.style.display = "none";
-		this.scoreView.style.display = "none";
+		this.welcomeView.style.display = "block";
 		let selectQuizContainer = document.getElementById('selectQuizContainer');
-		for (let i = 0; i < this.handler.numberOfAvailableQuizzes; i++) {
+		for (let quizName of this.handler.quizNames) {
 			let quizButton = document.createElement('button');
-			quizButton.id = `quiz${i}`;
 			quizButton.className = 'selectQuizButton';
-			quizButton.innerHTML = `Quiz ${i + 1}`;
+			quizButton.innerHTML = quizName;
 			selectQuizContainer.appendChild(quizButton);
 		}
 
@@ -131,11 +130,11 @@ class GameView {
 		this.welcomeView.style.display = "none";
 	}
 
-	showScoreView(score, pass) {
+	showScoreView(score, total, pass) {
 		this.quizView.style.display = "none";
 		this.scoreView.style.display = "block";
 		let finalScoreMessage = document.getElementById("finalScore");
-		finalScoreMessage.innerHTML = `You scored: ${score}`;
+		finalScoreMessage.innerHTML = `You scored: ${score} out of ${total}`;
 
 		let didPassMessage = document.getElementById("didPassMessage");
 		didPassMessage.innerHTML = pass ? 
@@ -143,16 +142,24 @@ class GameView {
 	}
 
 	displayNextQuestionAndScore(questionAndAnswers, score) {
-		console.log(questionAndAnswers, score);
 		let question = document.getElementById("question");
 		question.innerHTML = questionAndAnswers.question;
 
 		questionAndAnswers.answers.forEach((answer, i) => {
 			let button = document.getElementById(`${i}`);
 			button.innerHTML = answer.content;
+			button.style.backgroundColor = "#f5f4ff";
 		});
 
 		this.updateScore(score);
+	}
+
+	showAnswerFeedback(button, isCorrect) {
+		if (isCorrect) {
+			button.style.backgroundColor = "#cefcba";
+		} else {
+			button.style.backgroundColor = "#fcabab";
+		}
 	}
 
 	setupEventListeners() {
