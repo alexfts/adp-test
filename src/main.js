@@ -8,60 +8,15 @@
 	class Helpers {
 		static loadJSON(callback) {   
 			var req = new XMLHttpRequest();
-			req.overrideMimeType("application/json");
+			req.responseType = 'json';
 			req.open(
 				'GET',
 				'https://raw.githubusercontent.com/alexfts/adp-test/master/src/quiz.json', 
 				true
 			);
-			req.onreadystatechange = function () {
-				if (req.readyState == 4 && req.status == "200") {
-					callback(req.responseText);
-				}
-			};
+			req.onload = function () { callback(req.response); };
 			req.send(null);  
 	 	}
-	}
-
-	/*
-	 * Model for the quiz game; stores quizzes and the game state
-	 */
-	class Game {
-
-		constructor(quizzes) {
-			this.quizzes = quizzes;
-			this.selectedQuizQuestions = [];
-			this.score = 0;
-			this.currentQuestionIndex = 0;
-		}
-
-		get isGameOver() {
-			return this.currentQuestionIndex >= this.selectedQuizQuestions.length;
-		}
-
-		get currentQuestion() {
-			return this.selectedQuizQuestions[this.currentQuestionIndex].question;
-		}
-
-		get currentAnswerOptions() {
-			return this.selectedQuizQuestions[this.currentQuestionIndex].answers;
-		}
-
-		processAnswer(index) {
-			let answers = this.currentAnswerOptions;
-			let isCorrect = answers[index].value;
-
-			if (isCorrect) {
-				this.score++;
-			}
-			this.currentQuestionIndex++;
-			return isCorrect;
-		}
-
-		get didWin() {
-			return this.score / this.selectedQuizQuestions.length > 0.5;
-		}
-
 	}
 
 	/*
@@ -71,7 +26,7 @@
 
 		constructor() {
 			Helpers.loadJSON(response => {
-	   			let quizzes = JSON.parse(response).quizzes;
+	   			let quizzes = response.quizzes;
 	   			this.game = new Game(quizzes);
 	   			this.view = new GameView(this);
 	   		});
@@ -120,6 +75,48 @@
 
 		get quizNames() {
 			return this.game.quizzes.map(({title}) => title);
+		}
+
+	}
+
+
+	/*
+	 * Model for the quiz game; stores quizzes and the game state
+	 */
+	class Game {
+
+		constructor(quizzes) {
+			this.quizzes = quizzes;
+			this.selectedQuizQuestions = [];
+			this.score = 0;
+			this.currentQuestionIndex = 0;
+		}
+
+		get isGameOver() {
+			return this.currentQuestionIndex >= this.selectedQuizQuestions.length;
+		}
+
+		get currentQuestion() {
+			return this.selectedQuizQuestions[this.currentQuestionIndex].question;
+		}
+
+		get currentAnswerOptions() {
+			return this.selectedQuizQuestions[this.currentQuestionIndex].answers;
+		}
+
+		processAnswer(index) {
+			let answers = this.currentAnswerOptions;
+			let isCorrect = answers[index].value;
+
+			if (isCorrect) {
+				this.score++;
+			}
+			this.currentQuestionIndex++;
+			return isCorrect;
+		}
+
+		get didWin() {
+			return this.score / this.selectedQuizQuestions.length > 0.5;
 		}
 
 	}
