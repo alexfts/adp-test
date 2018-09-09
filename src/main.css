@@ -47,3 +47,10 @@ body {
 #scoreView {
 	font-size: 40px;
 }
+
+#answerFeedback {
+	font-size: 30px;
+  margin: 30px;
+  color: green;
+  display: none;
+}

@@ -168,6 +168,7 @@
 		}
 
 		displayNextQuestionAndScore(currentQuestion, answers, score) {
+			document.getElementById("answerFeedback").style.display = "none";
 			let question = document.getElementById("question");
 			question.innerHTML = currentQuestion;
 
@@ -185,11 +186,19 @@
 		}
 
 		showAnswerFeedback(button, isCorrect) {
+			let answerFeedback = document.getElementById("answerFeedback");
+
 			if (isCorrect) {
 				button.style.backgroundColor = "#cefcba";
+				answerFeedback.innerText = "Correct!";
+				answerFeedback.style.color = "green";
 			} else {
 				button.style.backgroundColor = "#fcabab";
+				answerFeedback.innerText = "Incorrect!";
+				answerFeedback.style.color = "red";
 			}
+
+			answerFeedback.style.display = "block";
 		}
 
 		setupEventListeners() {
