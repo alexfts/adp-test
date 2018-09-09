@@ -1,49 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="src/main.css">
+  <link rel="stylesheet" href="src/main.css">
 </head>
 <body>
 
-	<div id="viewContainer">
+  <div id="viewContainer">
 
-		<!-- Initial View -->
-	  <div id="welcomeView" class="view">
-	    <div>
-	      <h1>Start</h1>
-	    </div>
-	    <div id="selectQuizContainer">
-	    	<!-- Buttons to select quiz are dynamically inserted here -->
-	    </div>
-	  </div>
-	  
-	  <!-- Quiz --->
-	  <div id="quizView" class="view">
-	    <div>
-	    	<p id="score">Score</p>
-	    </div>
-	    <div>
-	    	<p id="question">Question</p>
-	    </div>
+    <!-- Initial View -->
+    <div id="welcomeView" class="view">
+      <div>
+        <h1>Start</h1>
+      </div>
+      <div id="selectQuizContainer">
+        <!-- Buttons to select quiz are dynamically inserted here -->
+      </div>
+    </div>
+    
+    <!-- Quiz --->
+    <div id="quizView" class="view">
+      <div>
+        <p id="score">Score</p>
+      </div>
+      <div>
+        <p id="question">Question</p>
+      </div>
 
-	    <div id="answerOptions">
-	    	<button id="0" class="optionButton"></button>
-	    	<button id="1" class="optionButton"></button>
-	    	<button id="2" class="optionButton"></button>
-	    	<button id="3" class="optionButton"></button>
-	    </div>
+      <div id="answerOptions">
+        <button id="0" class="optionButton"></button>
+        <button id="1" class="optionButton"></button>
+        <button id="2" class="optionButton"></button>
+        <button id="3" class="optionButton"></button>
+      </div>
 
-	    <div id="answerFeedback">
-	    </div>
-	  </div>
+      <div id="answerFeedback">
+      </div>
+    </div>
 
-	  <!-- Final Score View -->
-	  <div id="scoreView" class="view">
-	  	<p id="finalScore"> Final score </p>
-	  	<p id="didPassMessage"> Message </p>
-	  </div>
+    <!-- Final Score View -->
+    <div id="scoreView" class="view">
+      <p id="finalScore"> Final score </p>
+      <p id="didPassMessage"> Message </p>
+    </div>
 
-	</div>
+  </div>
 
   <script src="src/main.js"></script>
 </body>
