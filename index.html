@@ -4,15 +4,20 @@
 	<link rel="stylesheet" href="src/main.css">
 </head>
 <body>
+
 	<div id="viewContainer">
+
+		<!-- Initial View -->
 	  <div id="welcomeView" class="view">
 	    <div>
 	      <h1>Start</h1>
 	    </div>
 	    <div id="selectQuizContainer">
+	    	<!-- Buttons to select quiz are dynamically inserted -->
 	    </div>
 	  </div>
 	  
+	  <!-- Quiz --->
 	  <div id="quizView" class="view">
 	    <div>
 	    	<p id="score">Score</p>
@@ -29,11 +34,13 @@
 	    </div>
 	  </div>
 
+	  <!-- Final Score View -->
 	  <div id="scoreView" class="view">
 	  	<p id="finalScore"> Final score </p>
 	  	<p id="didPassMessage"> Message </p>
 	  </div>
-	 </div>
+
+	</div>
 
   <script src="src/main.js"></script>
 </body>
