@@ -1,6 +1,6 @@
 # App Developer Entrance Project
 
-Create a client-side quiz app based on the provided requirements, data and views.
+A client-side quiz app.
 
 ## Installation & Startup Requirements 
 
